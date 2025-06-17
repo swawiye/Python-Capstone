@@ -9,7 +9,7 @@ def validate_date(prompt):
     while True:
         date_input = input(prompt).strip()
         try:
-            datetime.strptime(date_input, "%d%m%Y")
+            datetime.strptime(date_input, "%d/%m/%Y") #regex for date format
             return date_input
         except ValueError:
             print("Invalid date format. Please use DD/MM/YYY.")
