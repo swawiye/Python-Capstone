@@ -44,6 +44,14 @@ while True:
         full_name = input("1. Full Name (e.g., Maria Talasow Carter): ")
         nation = input("2. Nation where donor is currently residing: ")
         dob = validate_date("3. D.O.B (DD/MM/YYYY): ")
+
+        # Age validation
+        today = datetime.today()
+        age = (today - dob).days // 365
+        if age < 18:
+            print("Sorry, donors must be at least 18 years old.")
+            continue # loop back to the main menu
+
         state = validate_state("4. State (e.g., dead or alive): ")
         hospital = input("5. Hospital (e.g., Aga Khan): ")
         donation_date = validate_date("6. Date of donation (DD/MM/YYYY): ")
