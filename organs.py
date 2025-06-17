@@ -32,21 +32,11 @@ def validate_state(prompt):
         else:
             print("Invalid state. Please enter 'alive' or 'dead'.")
 
-# Option validation
-def validate_option(prompt, options):
-    while True:
-        user_input = input(prompt).strip()
-        if user_input in options:
-            return user_input
-        else:
-            print(f"Invalid option. Please choose from {', '.join(options)}.")
-
-
 while True:
     print("\nAre you an organ donor or an organ recipient?")
     print("1. Organ donor")
     print("2. Organ recipient")
-    position = validate_option("Select your position (1 or 2): ").strip()
+    position = input("Select your position (1 or 2): ").strip()
 
     if position == '1':
         # Organ Donors
