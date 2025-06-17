@@ -17,18 +17,36 @@ def validate_date(prompt):
 # Time validation
 def validate_time(prompt):
     while True:
-        time_input = input(prompt).strip() # user input
+        time_input = input(prompt).strip() 
         if re.match(r"^(?:[01]\d|2[0-3]):[0-5]\d$", time_input):
             return time_input
         else:
             print("Invalid time format. Please use HH:MM (24-hour format).")
+
+# State validation
+def validate_state(prompt):
+    while True:
+        state_input = input(prompt).strip().lower()
+        if state_input in ['alive', 'dead']:
+            return state_input
+        else:
+            print("Invalid state. Please enter 'alive' or 'dead'.")
+
+# Option validation
+def validate_option(prompt, options):
+    while True:
+        user_input = input(prompt).strip()
+        if user_input in options:
+            return user_input
+        else:
+            print(f"Invalid option. Please choose from {', '.join(options)}.")
 
 
 while True:
     print("\nAre you an organ donor or an organ recipient?")
     print("1. Organ donor")
     print("2. Organ recipient")
-    position = input("Select your position (1 or 2): ").strip()
+    position = validate_option("Select your position (1 or 2): ").strip()
 
     if position == '1':
         # Organ Donors
@@ -36,7 +54,7 @@ while True:
         full_name = input("1. Full Name (e.g., Maria Talasow Carter): ")
         nation = input("2. Nation where donor is currently residing: ")
         dob = validate_date("3. D.O.B (DD/MM/YYYY): ")
-        state = input("4. State (e.g., dead or alive): ")
+        state = validate_state("4. State (e.g., dead or alive): ")
         hospital = input("5. Hospital (e.g., Aga Khan): ")
         donation_date = validate_date("6. Date of donation (DD/MM/YYYY): ")
         surgery_time = validate_time("7. Time the surgery was completed(HH:MM - 24-hour format): ")
