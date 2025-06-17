@@ -47,7 +47,7 @@ while True:
 
         # Age validation
         today = datetime.today()
-        age = (today - dob).days // 365
+        age = (today - dob)
         if age < 18:
             print("Sorry, donors must be at least 18 years old.")
             continue # loop back to the main menu
