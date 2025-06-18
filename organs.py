@@ -32,6 +32,21 @@ def validate_state(prompt):
         else:
             print("Invalid state. Please enter 'alive' or 'dead'.")
 
+# Organ validation
+# List of donateable organs
+DONATEABLE_ORGANS = [
+    "heart", "lungs", "liver", "kidneys", "pancreas", "intestines", 
+    "corneas", "skin", "bone marrow", "tendons", "veins", "heart valves"
+]
+def validate_organ(prompt):
+    while True:
+        organ_input = input(prompt).strip().lower()
+        if organ_input in DONATEABLE_ORGANS:
+            return organ_input
+        else:
+            print("Invalid organ. Please enter a valid donateable organ:")
+            print(", ".join(DONATEABLE_ORGANS))
+
 while True:
     print("\nAre you an organ donor or an organ recipient?")
     print("1. Organ donor")
@@ -43,11 +58,12 @@ while True:
         print("\nEnter your details:")
         full_name = input("1. Full Name (e.g., Maria Talasow Carter): ")
         nation = input("2. Nation where donor is currently residing: ")
-        dob = validate_date("3. D.O.B (DD/MM/YYYY): ")
+        dob_str = validate_date("3. D.O.B (DD/MM/YYYY): ")
 
+        dob = datetime.strptime(dob_str, "%d/%m/%Y")
         # Age validation
         today = datetime.today()
-        age = (today - dob)
+        age = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
         if age < 18:
             print("Sorry, donors must be at least 18 years old.")
             continue # loop back to the main menu
@@ -56,7 +72,8 @@ while True:
         hospital = input("5. Hospital (e.g., Aga Khan): ")
         donation_date = validate_date("6. Date of donation (DD/MM/YYYY): ")
         surgery_time = validate_time("7. Time the surgery was completed(HH:MM - 24-hour format): ")
-        org = input("8. Donation Organization: ")
+        organ = validate_organ("8. Which organ is being donated? ")
+        org = input("9. Donation Organization: ")
 
         print("\nThank you! The donor information has been recorded.")
 
@@ -69,6 +86,7 @@ while True:
         print("Hospital: " + hospital)
         print("Donation Date: " + donation_date)
         print("Time Surgery Was Completed: " + surgery_time)
+        print("Organ: " + organ)
         print("Donation Organization: " + org + "\n")
         break
 
@@ -82,7 +100,8 @@ while True:
         donor_id = input("5. Donor ID: ")
         reception_date = validate_date("6. Date of reception (DD/MM/YYYY): ")
         surgery_time = validate_time("7. Time the surgery is set to begin (HH:MM - 24-hour format): ")
-        org = input("8. Donation Organization: ")
+        organ = validate_organ("8. Which organ is being received? ")
+        org = input("9. Donation Organization: ")
 
         print("\nThank you! The recipient information has been recorded.")
 
@@ -95,6 +114,7 @@ while True:
         print("Donor ID: " + donor_id)
         print("Reception Date: " + reception_date)
         print("Time Surgery Is Set to Begin: " + surgery_time)
+        print("Organ: " + organ)
         print("Donation Organization: " + org + "\n")
         break
 
