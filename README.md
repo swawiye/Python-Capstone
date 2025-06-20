@@ -9,11 +9,6 @@ Organa is an organ donation records system that keeps track of donor and recipie
 - [@swawiye](https://www.github.com/swawiye)
 
 
-## Appendix
-
-Any additional information goes here
-
-
 ## Features
 
 - Special validation features to improve data security and data integrity
